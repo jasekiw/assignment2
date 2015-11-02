@@ -35,6 +35,8 @@ public class Program {
         System.out.println("Words Not Found: " + wordsNotFound);
         System.out.println("Average comparisons of Words Found: " + avgComparisonsFound);
         System.out.println("Average comparisons of Words Not Found: " + avgComparisonsNotFound);
+        System.out.println("comparisons of Words Found: " + compsWordsFound);
+        System.out.println("comparisons of Words Not Found: " + compsWordsNotFound);
     }
 
     /**
@@ -86,7 +88,7 @@ public class Program {
         {
             BufferedReader reader = new BufferedReader(new FileReader(new File("oliver.txt")));
             String line = reader.readLine();
-            int count = 0;
+
             while(line != null)
             {
                 String[] words = line.split("\\s+");
@@ -96,11 +98,8 @@ public class Program {
                     word = word.trim();
                     searchDictionary(word);
                 }
-                count++;
-                if((count % 1000) == 0)
-                {
-                    System.out.println(count); // get a progress on the spell check but don't do it so often that it slows down the parser
-                }
+
+
                 line = reader.readLine();
 
             }
@@ -124,19 +123,20 @@ public class Program {
         }
         word = word.toUpperCase();
         int index = ((int)word.toCharArray()[0]) - 65;
-        dictionary.stringComparisons = 0;
+
         if(index < 0 || index > 25) // not a word
         {
             return;
         }
+        dictionary.get(index).comparisons = 0;
         if(dictionary.get(index).contains(word))
         {
-            compsWordsFound += dictionary.stringComparisons;
+            compsWordsFound += dictionary.get(index).comparisons;
             wordsFound++;
         }
         else
         {
-            compsWordsNotFound += dictionary.stringComparisons;
+            compsWordsNotFound += dictionary.get(index).comparisons;
             wordsNotFound++;
         }
     }

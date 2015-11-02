@@ -3,7 +3,7 @@
 public class MyLinkedList<E> extends MyAbstractList<E> {
 
     private Node<E> head, tail;
-    public int stringComparisons = 0;
+    public int comparisons = 0;
 
     /** Create a default list */
     public MyLinkedList() {
@@ -199,7 +199,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         Node<E> current = head;
         while(current != null)
         {
-            stringComparisons++;
+            comparisons++;
             if (current.element.equals(e))
                 return true;
             current = current.next;
